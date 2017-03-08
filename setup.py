@@ -53,10 +53,9 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py bdist_wheel upload')
     sys.exit()
 
-if sys.argv[-1] == 'tag':
+if sys.argv[-1] == 'bump':
     print("Tagging the version on git:")
-    os.system("git tag -a %s -m 'version %s'" % (version, version))
-    os.system("git push --tags")
+    os.system("bumpversion patch --no-tag")
     sys.exit()
 
 setup(
