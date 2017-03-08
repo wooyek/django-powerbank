@@ -65,7 +65,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author="Janusz Skonieczny",
     author_email='js+pypi@bravelabs.pl',
-    url='https://github.com/wooyek/django_powerbank',
+    url='https://github.com/wooyek/django-powerbank',
     packages=find_packages(),
     # package_dir={
     #     'django_powerbank': 'django_powerbank'
