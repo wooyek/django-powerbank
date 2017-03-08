@@ -21,18 +21,6 @@ def bump(ctx, patch=True):
 
 
 @task
-def register_pypi(ctx):
-    ctx.run("git checkout master")
-    ctx.run("python setup.py register -r pypi")
-
-
-@task
-def register_pypi_test(ctx):
-    ctx.run("git checkout master")
-    ctx.run("python setup.py register -r pypitest")
-
-
-@task
 def upload_pypi(ctx):
     ctx.run("git checkout master")
     ctx.run("python setup.py sdist upload -r pypi")
