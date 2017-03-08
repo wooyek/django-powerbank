@@ -8,7 +8,7 @@ import uuid
 from pip.req import parse_requirements
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
     from distutils.core import setup
 
@@ -66,12 +66,10 @@ setup(
     author="Janusz Skonieczny",
     author_email='js+pypi@bravelabs.pl',
     url='https://github.com/wooyek/django_powerbank',
-    packages=[
-        'django_powerbank',
-    ],
-    package_dir={
-        'django_powerbank': 'django_powerbank'
-    },
+    packages=find_packages(),
+    # package_dir={
+    #     'django_powerbank': 'django_powerbank'
+    # },
     entry_points={
         'console_scripts': [
             'django_powerbank=django_powerbank.cli:main'
