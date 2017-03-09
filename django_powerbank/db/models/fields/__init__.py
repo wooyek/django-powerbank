@@ -199,7 +199,7 @@ class ChoicesIntEnum(IntEnum):
 
     @classmethod
     def choices(cls):
-        return [(item.value, _(item.name.replace("_", " ").capitalize())) for item in cls]
+        return [(item.value, __(item.name.replace("_", " ").capitalize())) for item in cls]
 
     @classmethod
     def values(cls):
