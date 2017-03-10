@@ -21,7 +21,6 @@ class AssertionsMx(TestCase):
 
 
 class MigrationsCheck(TestCase):
-    @unittest.skipUnless(sys.platform == 'win32', "Only test locally for now")
     def test_missing_migrations(self):
         from django.db import connection
         from django.apps.registry import apps
