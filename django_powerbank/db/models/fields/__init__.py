@@ -199,7 +199,7 @@ class ChoicesIntEnum(IntEnum):
 
     @classmethod
     def choices(cls):
-        return [(item.value, __(item.name.replace("_", " ").capitalize())) for item in cls]
+        return [(item.value, _(item.name.replace("_", " ").capitalize())) for item in cls]
 
     @classmethod
     def values(cls):
@@ -211,4 +211,4 @@ class BinaryMaskEnum(ChoicesIntEnum):
 
     @classmethod
     def get_display(cls, value):
-        return ", ".join((__(item.name.replace("_", " ").capitalize()) for item in cls if item.value & value))
+        return ", ".join((_(item.name.replace("_", " ").capitalize()) for item in cls if item.value & value))
