@@ -14,6 +14,7 @@ from django.core import checks
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.crypto import salted_hmac, get_random_string
+from django.utils.functional import lazy
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from django.utils.translation import ugettext as __, ugettext_lazy as _
@@ -211,4 +212,7 @@ class BinaryMaskEnum(ChoicesIntEnum):
 
     @classmethod
     def get_display(cls, value):
-        return ", ".join((_(item.name.replace("_", " ").capitalize()) for item in cls if item.value & value))
+        def join_value_names(value):
+            return ", ".join((__(item.name.replace("_", " ").capitalize()) for item in cls if item.value & value))
+
+        return lazy(join_value_names, value)
