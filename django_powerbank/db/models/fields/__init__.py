@@ -212,7 +212,4 @@ class BinaryMaskEnum(ChoicesIntEnum):
 
     @classmethod
     def get_display(cls, value):
-        def join_value_names(value):
-            return ", ".join((__(item.name.replace("_", " ").capitalize()) for item in cls if item.value & value))
-
-        return lazy(join_value_names, value)
+        return ", ".join((__(item.name.replace("_", " ").capitalize()) for item in cls if item.value & value))
