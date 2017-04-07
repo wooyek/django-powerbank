@@ -16,10 +16,10 @@ class Typeahead(Input):
         super().__init__(attrs)
         self.url = url
 
-    def build_attrs(self, extra_attrs=None, **kwargs):
+    def build_attrs(self, base_attrs, extra_attrs=None, **kwargs):
         extra_attrs["class"] = extra_attrs.get("class", "") + " typeahead"
         extra_attrs.setdefault("data-url", self.url)
-        attrs = super().build_attrs(extra_attrs, **kwargs)
+        attrs = super().build_attrs(base_attrs, extra_attrs=extra_attrs, **kwargs)
         return attrs
 
 
