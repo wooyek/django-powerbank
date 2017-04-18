@@ -54,11 +54,11 @@ class MaxCurrentYearValidator(object):
 
 
 @deconstructible
-class SmarUrlValidator(object): #TODO: typo
+class SmartUrlValidator(object):
     def __call__(self, value):
         if value.startswith("http://") or value.startswith("https://"):
             return value
         return "http://" + value
 
     def __eq__(self, other):
-        return isinstance(other, SmarUrlValidator)
+        return isinstance(other, SmartUrlValidator)
