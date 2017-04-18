@@ -11,13 +11,16 @@ class AssertionsMx(TestCase):
     def assertNoFormErrors(self, response, form_context_key='form'):
         if not hasattr(response, 'context_data'):
             return
-        form = response.context_data.get(form_context_key)
-        if form is None:
+        forms = response.context_data.get(form_context_key)
+        if forms is None:
             return
-        if isinstance(form.errors, dict):
-            self.assertDictEqual({}, form.errors)
-        else:
-            self.assertListEqual([], form.errors)
+        if not isinstance(forms, list):
+            forms = [forms]
+        for form in forms:
+            if isinstance(form.errors, dict):
+                self.assertDictEqual({}, form.errors)
+            else:
+                self.assertListEqual([], form.errors)
 
 
 class MigrationsCheck(TestCase):
