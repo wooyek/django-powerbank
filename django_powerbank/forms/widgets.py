@@ -63,6 +63,8 @@ class Selectize(widgets.Select):
         default = (None, [], 0)
         groups = [default]
         for v in value:
+            if not v:
+                continue
             label = self.choices.queryset.filter(id=v).get().name
             subgroup = default[1]
             subgroup.append(self.create_option(
