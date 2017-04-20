@@ -19,9 +19,8 @@ class PlRegonField(models.CharField):
     def formfield(self, **kwargs):
         return super().formfield(form_class=forms.PLREGONField, **kwargs)
 
-    def clean(self, value, model_instance):
-        value = super().clean(value, model_instance)
-        return value or None
+    def to_python(self, value):
+        return super().to_python(value) or None
 
 
 class PlNipField(models.CharField):
@@ -33,7 +32,6 @@ class PlNipField(models.CharField):
     def formfield(self, **kwargs):
         return super().formfield(form_class=forms.PLNIPField, **kwargs)
 
-    def clean(self, value, model_instance):
-        value = super().clean(value, model_instance)
-        return value or None
+    def to_python(self, value):
+        return super().to_python(value) or None
 
