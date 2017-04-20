@@ -22,7 +22,10 @@ class AccessMixin(ExceptionResponseView):
             return redirect_to_login(path)
 
         if not self.is_authorized(*args, **kwargs):
-            return HttpResponseForbidden(self.get_forbidden_message())
+            return self.handle_forbidden()
+
+    def handle_forbidden(self):
+        return HttpResponseForbidden(self.get_forbidden_message())
 
     def dispatch(self, request, *args, **kwargs):
         try:
