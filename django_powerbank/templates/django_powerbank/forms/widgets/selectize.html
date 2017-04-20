@@ -1,0 +1,30 @@
+{% include "django/forms/widgets/select.html" %}
+<script>
+    head.ready(function () {
+        $('#{{ widget.attrs.id }}').selectize({
+            valueField: 'pk',
+            labelField: 'text',
+            searchField: 'text',
+            //preload: true,
+            options: [],
+            create: false,
+            load: function (query, callback) {
+                console.debug("this", this);
+                if (!query.length && !this.settings.preload) return callback();
+                $.ajax({
+                    url: '{{ widget.url }}',
+                    type: 'GET',
+                    data: {
+                        q: query,
+                    },
+                    error: function () {
+                        callback();
+                    },
+                    success: function (res) {
+                        callback(res);
+                    }
+                });
+            }
+        });
+    });
+</script>
