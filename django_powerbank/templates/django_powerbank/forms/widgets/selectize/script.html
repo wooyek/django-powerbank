@@ -1,18 +1,28 @@
-{% include "django/forms/widgets/select.html" %}
 <script>
     head.ready(function () {
         $('#{{ widget.attrs.id }}').selectize({
-            valueField: 'pk',
-            labelField: 'text',
-            searchField: 'text',
+            //{{ selectize.plugins }}
+            plugins: {{ selectize.plugins|safe}},
+            valueField: '{{ selectize.value_field }}',
+            labelField: '{{ selectize.label_field }}',
+            searchField: '{{ selectize.search_field }}',
             //preload: true,
             options: [],
-            create: false,
+            {% if selectize.allow_create %}
+                create: function (input) {
+                    return {
+                        value: input,
+                        text: input
+                    }
+                },
+            {% else %}
+                create: false,
+            {% endif %}
             load: function (query, callback) {
                 console.debug("this", this);
                 if (!query.length && !this.settings.preload) return callback();
                 $.ajax({
-                    url: '{{ widget.url }}',
+                    url: '{{ selectize.url }}',
                     type: 'GET',
                     data: {
                         q: query,
