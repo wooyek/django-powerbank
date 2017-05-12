@@ -10,3 +10,4 @@ mock
 codecov
 invoke
 Sphinx
+factory-boy

@@ -5,9 +5,14 @@ from unittest import TestCase
 
 import sys
 
+from datetime import date, datetime
+
+from django.conf import settings
+from django.test import Client
+from . import factories
+
 
 class AssertionsMx(TestCase):
-
     def assertNoFormErrors(self, response, form_context_key='form'):
         if not hasattr(response, 'context_data'):
             return
@@ -37,3 +42,24 @@ class MigrationsCheck(TestCase):
         )
         changes = autodetector.changes(graph=executor.loader.graph)
         self.assertEqual({}, changes)
+
+
+class AdminUserTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user = factories.UserFactory.create(is_superuser=True, is_staff=True, username='django_administrator')
+        self.client.force_login(self.user, settings.AUTHENTICATION_BACKENDS[0])
+
+
+class StaffUserTestCase(AssertionsMx, TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user = factories.UserFactory.create(is_superuser=False, is_staff=True)
+        self.client.force_login(self.user, settings.AUTHENTICATION_BACKENDS[0])
+
+
+class UserTestCase(TestCase, AssertionsMx):
+    def setUp(self):
+        self.client = Client()
+        self.user = self.person.user
+        self.client.force_login(self.user, settings.AUTHENTICATION_BACKENDS[0])

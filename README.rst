@@ -29,13 +29,6 @@ A strongly opinionated collection of gems, stones, screws, duct tape & chewing g
 Features
 --------
 
-* TODO
+* TODO: Testing!
 
-Credits
----------
-
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
-
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
 
