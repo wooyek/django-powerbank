@@ -44,22 +44,22 @@ class MigrationsCheck(TestCase):
         self.assertEqual({}, changes)
 
 
-class AdminUserTestCase(TestCase):
+class AdminUserTestCase(AssertionsMx):
     def setUp(self):
         self.client = Client()
         self.user = factories.UserFactory.create(is_superuser=True, is_staff=True, username='django_administrator')
         self.client.force_login(self.user, settings.AUTHENTICATION_BACKENDS[0])
 
 
-class StaffUserTestCase(AssertionsMx, TestCase):
+class StaffUserTestCase(AssertionsMx):
     def setUp(self):
         self.client = Client()
         self.user = factories.UserFactory.create(is_superuser=False, is_staff=True)
         self.client.force_login(self.user, settings.AUTHENTICATION_BACKENDS[0])
 
 
-class UserTestCase(TestCase, AssertionsMx):
+class UserTestCase(AssertionsMx):
     def setUp(self):
         self.client = Client()
-        self.user = self.person.user
+        self.user = factories.UserFactory.create(is_superuser=False, is_staff=False)
         self.client.force_login(self.user, settings.AUTHENTICATION_BACKENDS[0])

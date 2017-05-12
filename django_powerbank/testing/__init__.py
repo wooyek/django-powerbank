@@ -5,3 +5,5 @@
 # This source code and all resulting intermediate files are CONFIDENTIAL and
 # PROPRIETY TRADE SECRETS of Brave Labs sp. z o.o.
 # Use is subject to license terms. See NOTICE file of this project for details.
+
+from .base import *
