@@ -64,9 +64,9 @@ class SelectizeBase(widgets.Input):
 class SelectizeSelect(SelectizeBase, widgets.Select):
     """
     A selectize.js field
-    
-    It requires selectize.js and headjs to be avaialable in the browser. See a template below to se why. 
-    You can provide your own template to use selectize.js in a different way. 
+
+    It requires selectize.js and headjs to be avaialable in the browser. See a template below to se why.
+    You can provide your own template to use selectize.js in a different way.
     """
     template_name = 'django_powerbank/forms/widgets/selectize/select.html'
 
@@ -79,7 +79,11 @@ class SelectizeSelect(SelectizeBase, widgets.Select):
             if not v:
                 continue
             if hasattr(self.choices, 'queryset'):
-                label = self.choices.queryset.filter(id=v).get().name
+                item = self.choices.queryset.filter(id=v).first()
+                if item:
+                    label = item.name
+                else:
+                    label = force_text(v)
             else:
                 label = force_text(v)
             subgroup = default[1]
