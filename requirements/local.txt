@@ -1,1 +1,9 @@
 -r test.txt
+bumpversion
+wheel
+invoke
+watchdog
+Sphinx
+
+# Your app in editable mode.
+-e ./

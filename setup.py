@@ -4,6 +4,8 @@ import os
 import re
 import sys
 import uuid
+from glob import glob
+from os.path import basename, splitext
 
 from pip.req import parse_requirements
 
@@ -30,7 +32,7 @@ test_requirements = parse_requirements(
 
 
 def get_version(*file_paths):
-    """Retrieves the version from django_powerbank/__init__.py"""
+    """Retrieves the version from path"""
     filename = os.path.join(os.path.dirname(__file__), *file_paths)
     version_file = open(filename).read()
     version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M)
@@ -39,12 +41,12 @@ def get_version(*file_paths):
     raise RuntimeError('Unable to find version string.')
 
 
-version = get_version("django_powerbank", "__init__.py")
+version = get_version("src", "django_powerbank", "__init__.py")
+
 
 if sys.argv[-1] == 'publish':
     try:
         import wheel
-
         print("Wheel version: ", wheel.__version__)
     except ImportError:
         print('Wheel library missing. Please run "pip install wheel"')
@@ -54,45 +56,45 @@ if sys.argv[-1] == 'publish':
     sys.exit()
 
 if sys.argv[-1] == 'bump':
-    print("Tagging the version on git:")
+    print("Bumping version number:")
     os.system("bumpversion patch --no-tag")
+    sys.exit()
+
+if sys.argv[-1] == 'tag':
+    print("Tagging the version on git:")
+    os.system("git tag -a %s -m 'version %s'" % (version, version))
+    os.system("git push --tags")
     sys.exit()
 
 setup(
     name='django-powerbank',
     version=version,
-    description="Extra utilities currently missing from Django",
+    description="""Extra power for included batteries""",
     long_description=readme + '\n\n' + history,
-    author="Janusz Skonieczny",
+    author='Janusz Skonieczny',
     author_email='js+pypi@bravelabs.pl',
     url='https://github.com/wooyek/django-powerbank',
-    packages=find_packages(),
-    # package_dir={
-    #     'django_powerbank': 'django_powerbank'
-    # },
-    entry_points={
-        'console_scripts': [
-            'django_powerbank=django_powerbank.cli:main'
-        ]
-    },
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
+    py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
     include_package_data=True,
-    install_requires=[str(r.req) for r in install_requires],
-    license="MIT license",
+    install_requires=[str(r.req) for r in install_requires] + ['Django>=1.10'],
+    license="MIT",
     zip_safe=False,
-    keywords='django_powerbank',
+    keywords='django-powerbank',
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
+        'Framework :: Django',
+        'Framework :: Django :: 1.10',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-    test_suite='tests',
-    tests_require=[str(r.req) for r in test_requirements]
+    test_suite='runtests.run_tests',
+    tests_require=[str(r.req) for r in test_requirements],
 )

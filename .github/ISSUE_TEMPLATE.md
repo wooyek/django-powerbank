@@ -1,4 +1,5 @@
 * Django Powerbank version:
+* Django version:
 * Python version:
 * Operating System:
 

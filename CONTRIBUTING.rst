@@ -1,5 +1,3 @@
-.. highlight:: shell
-
 ============
 Contributing
 ============
@@ -15,7 +13,7 @@ Types of Contributions
 Report Bugs
 ~~~~~~~~~~~
 
-Report bugs at https://github.com/wooyek/django_powerbank/issues.
+Report bugs at https://github.com/wooyek/django-powerbank/issues.
 
 If you are reporting a bug, please include:
 
@@ -27,13 +25,13 @@ Fix Bugs
 ~~~~~~~~
 
 Look through the GitHub issues for bugs. Anything tagged with "bug"
-and "help wanted" is open to whoever wants to implement it.
+is open to whoever wants to implement it.
 
 Implement Features
 ~~~~~~~~~~~~~~~~~~
 
-Look through the GitHub issues for features. Anything tagged with "enhancement"
-and "help wanted" is open to whoever wants to implement it.
+Look through the GitHub issues for features. Anything tagged with "feature"
+is open to whoever wants to implement it.
 
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
@@ -45,7 +43,7 @@ articles, and such.
 Submit Feedback
 ~~~~~~~~~~~~~~~
 
-The best way to send feedback is to file an issue at https://github.com/wooyek/django_powerbank/issues.
+The best way to send feedback is to file an issue at https://github.com/wooyek/django-powerbank/issues.
 
 If you are proposing a feature:
 
@@ -57,17 +55,17 @@ If you are proposing a feature:
 Get Started!
 ------------
 
-Ready to contribute? Here's how to set up `django_powerbank` for local development.
+Ready to contribute? Here's how to set up `django-powerbank` for local development.
 
-1. Fork the `django_powerbank` repo on GitHub.
+1. Fork the `django-powerbank` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/django_powerbank.git
+    $ git clone git@github.com:your_name_here/django-powerbank.git
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
 
-    $ mkvirtualenv django_powerbank
-    $ cd django_powerbank/
+    $ mkvirtualenv django-powerbank
+    $ cd django-powerbank/
     $ python setup.py develop
 
 4. Create a branch for local development::
@@ -76,11 +74,12 @@ Ready to contribute? Here's how to set up `django_powerbank` for local developme
 
    Now you can make your changes locally.
 
-5. When you're done making changes, check that your changes pass flake8 and the tests, including testing other Python versions with tox::
+5. When you're done making changes, check that your changes pass flake8 and the
+   tests, including testing other Python versions with tox::
 
-    $ flake8 django_powerbank tests
-    $ python setup.py test or py.test
-    $ tox
+        $ tox -e check
+        $ python setup.py test
+        $ tox
 
    To get flake8 and tox, just pip install them into your virtualenv.
 
@@ -101,8 +100,8 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
-3. The pull request should work for Python 2.6, 2.7, 3.3, 3.4 and 3.5, and for PyPy. Check
-   https://travis-ci.org/wooyek/django_powerbank/pull_requests
+3. The pull request should work for Python 2.6, 2.7, and 3.3, and for PyPy. Check
+   https://travis-ci.org/wooyek/django-powerbank/pull_requests
    and make sure that the tests pass for all supported Python versions.
 
 Tips
@@ -110,5 +109,4 @@ Tips
 
 To run a subset of tests::
 
-$ py.test tests.test_django_powerbank
-
+    $ python -m unittest tests.test_django_powerbank

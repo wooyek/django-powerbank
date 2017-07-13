@@ -1,13 +1,12 @@
--r production.txt
-bumpversion
-wheel
-watchdog
+-r base.txt
+coverage
+mock
 flake8
 tox
-coverage
-pytest
-mock
 codecov
-invoke
-Sphinx
+pytest
+pytest-xdist
+pytest-html
+pytest-django
 factory-boy
+environ 
