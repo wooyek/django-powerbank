@@ -1,0 +1,3 @@
+# Django Powerbank dependencies (excluding django which is set in appropriate version by tox)
+# For development we keep them unfreezed to work and test on newest versions as soon as they are released
+click
