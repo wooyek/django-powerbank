@@ -9,6 +9,7 @@ import six
 from django.core.exceptions import FieldDoesNotExist
 from django.db import models
 from six import python_2_unicode_compatible
+from django.utils.translation import ugettext as __, ugettext_lazy as _
 
 
 @python_2_unicode_compatible
@@ -28,7 +29,8 @@ class BaseModel(models.Model):
         try:
             return self._meta.get_field(field_name).verbose_name.title()
         except FieldDoesNotExist:
-            return field_name.replace('_', ' ').title()
+            name = field_name.replace('_', ' ')
+            return _(name).title()
 
     def to_dict(self, include=None, exclude=None):
         """
