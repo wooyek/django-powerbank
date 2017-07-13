@@ -16,9 +16,8 @@ def bump(ctx, patch=True):
     else:
         ctx.run("bumpversion minor")
 
-
 @task
-def release(ctx):
+def publish(ctx):
     ctx.run("git checkout master")
     ctx.run("python setup.py sdist upload -r pypi")
 
@@ -46,8 +45,8 @@ def test(ctx):
     ctx.run("tox")
 
 
-@task(sync, test, bump, release)
-def publish(ctx):
+@task(sync, test, bump, publish)
+def release(ctx):
     ctx.run("git checkout develop")
     ctx.run("git merge master --verbose")
 
