@@ -42,7 +42,7 @@ def sync(ctx):
 
 @task
 def test(ctx):
-    ctx.run("tox")
+    ctx.run("tox -e py35")
 
 
 @task(sync, test, bump, publish)
