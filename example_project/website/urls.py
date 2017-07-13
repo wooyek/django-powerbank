@@ -19,5 +19,4 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', include('django_powerbank.urls', namespace='django_powerbank')),
 ]

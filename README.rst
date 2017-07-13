@@ -12,12 +12,12 @@ Django Powerbank
     :target: https://codecov.io/gh/wooyek/django-powerbank
 
 .. image:: https://readthedocs.org/projects/django-powerbank/badge/?version=latest
-:target: https://django-powerbank.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
+    :target: https://django-powerbank.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 .. image:: https://pyup.io/repos/github/wooyek/django-powerbank/shield.svg
-:target: https://pyup.io/repos/github/wooyek/django-powerbank/
-     :alt: Updates
+    :target: https://pyup.io/repos/github/wooyek/django-powerbank/
+    :alt: Updates
 
 Extra power for included batteries
 

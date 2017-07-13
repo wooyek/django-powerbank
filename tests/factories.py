@@ -3,7 +3,6 @@ import factory
 from django.contrib.auth import get_user_model
 from faker import Faker
 
-from django_powerbank import models
 
 fake = Faker()
 
@@ -18,13 +17,3 @@ class UserFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = get_user_model()
-
-
-class SomeModelFactory(factory.DjangoModelFactory):
-    class Meta:
-        model = models.SomeModel
-
-
-class AndAnotherFactory(factory.DjangoModelFactory):
-    class Meta:
-        model = models.AndAnother

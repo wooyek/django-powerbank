@@ -9,4 +9,4 @@ pytest-xdist
 pytest-html
 pytest-django
 factory-boy
-environ 
+django-environ
