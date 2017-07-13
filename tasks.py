@@ -1,10 +1,7 @@
 # coding=utf-8
-# Copyright (C) 2015 Janusz Skonieczny
 
 import logging
-import sys
-from pathlib import Path
-from invoke import run, task
+from invoke import task
 
 logging.basicConfig(format='%(asctime)s %(levelname)-7s %(thread)-5d %(filename)s:%(lineno)s | %(funcName)s | %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
@@ -21,7 +18,7 @@ def bump(ctx, patch=True):
 
 
 @task
-def upload_pypi(ctx):
+def release(ctx):
     ctx.run("git checkout master")
     ctx.run("python setup.py sdist upload -r pypi")
 
@@ -43,8 +40,14 @@ def sync(ctx):
     ctx.run("git checkout master")
     ctx.run("git merge develop --verbose")
 
-@task(sync, bump, upload_pypi)
-def release(ctx):
+
+@task
+def test(ctx):
+    ctx.run("tox")
+
+
+@task(sync, test, bump, release)
+def publish(ctx):
     ctx.run("git checkout develop")
     ctx.run("git merge master --verbose")
 
