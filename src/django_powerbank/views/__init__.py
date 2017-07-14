@@ -1,7 +1,7 @@
 import six
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseForbidden
-from django.http.response import HttpResponseRedirectBase, HttpResponse
+from django.http.response import HttpResponseRedirectBase, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 from django.shortcuts import redirect
 from django.views import View
 
@@ -40,9 +40,23 @@ class Http302(ExceptionResponse):
         super(Http302, self).__init__(response)
 
 
+class Http400(ExceptionResponse):
+    def __init__(self, response):
+        if isinstance(response, six.string_types):
+            response = HttpResponseBadRequest(response)
+        super(ExceptionResponse, self).__init__(response)
+
+
+class Http401(ExceptionResponse):
+    def __init__(self, response):
+        if isinstance(response, six.string_types):
+            response = HttpResponseNotFound(response)
+        super(ExceptionResponse, self).__init__(response)
+
+
 class ExceptionResponseView(View):
     def dispatch(self, request, *args, **kwargs):
         try:
-            return super().dispatch(request, *args, **kwargs)
+            return super(ExceptionResponseView, self).dispatch(request, *args, **kwargs)
         except ExceptionResponse as ex:
             return ex.response
