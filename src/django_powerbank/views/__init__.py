@@ -44,14 +44,14 @@ class Http400(ExceptionResponse):
     def __init__(self, response):
         if isinstance(response, six.string_types):
             response = HttpResponseBadRequest(response)
-        super(ExceptionResponse, self).__init__(response)
+        super(Http400, self).__init__(response)
 
 
 class Http401(ExceptionResponse):
     def __init__(self, response):
         if isinstance(response, six.string_types):
             response = HttpResponseNotFound(response)
-        super(ExceptionResponse, self).__init__(response)
+        super(Http401, self).__init__(response)
 
 
 class ExceptionResponseView(View):
