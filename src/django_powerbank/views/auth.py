@@ -37,7 +37,7 @@ class AuthenticatedView(AbstractAccessView):
         return redirect_to_login(path)
 
 # Backward compatibility alias
-AccessView = AuthenticatedView
+AccessMixin = AuthenticatedView
 
 
 class AbstractAuthorizedView(AuthenticatedView):
