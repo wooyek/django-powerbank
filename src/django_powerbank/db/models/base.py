@@ -27,10 +27,10 @@ class BaseModel(models.Model):
 
     def get_field_name(self, field_name):
         try:
-            return self._meta.get_field(field_name).verbose_name.title()
+            return self._meta.get_field(field_name).verbose_name.capitalize()
         except FieldDoesNotExist:
             name = field_name.replace('_', ' ')
-            return _(name).title()
+            return _(name).capitalize()
 
     def to_dict(self, include=None, exclude=None):
         """
