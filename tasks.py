@@ -32,7 +32,7 @@ def register_pypi_test(ctx):
 
 
 @task
-def upload_pypi(ctx):
+def publish(ctx):
     ctx.run("git checkout master")
     ctx.run("python setup.py sdist upload -r pypi")
 
@@ -54,7 +54,13 @@ def sync(ctx):
     ctx.run("git checkout master")
     ctx.run("git merge develop --verbose")
 
-@task(sync, bump, upload_pypi)
+
+@task
+def test(ctx):
+    ctx.run("tox")
+
+
+@task(sync, test, bump, publish)
 def release(ctx):
     ctx.run("git checkout develop")
     ctx.run("git merge master --verbose")
