@@ -13,6 +13,7 @@ import six
 from django.core import checks
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models import NOT_PROVIDED
 from django.utils.crypto import salted_hmac, get_random_string
 from django.utils.functional import lazy
 from django.utils.safestring import mark_safe
@@ -118,6 +119,7 @@ class UniqueSlugField(AutoSlugField, models.SlugField):
 
 class MarkDownField(SourceFieldMixin, models.TextField):
     def pre_save(self, model_instance, add):
+        logging.debug(": %s", (model_instance, self.source_field))
         if not getattr(model_instance, self.source_field):
             return super(MarkDownField, self).pre_save(model_instance, add)
 
@@ -127,11 +129,16 @@ class MarkDownField(SourceFieldMixin, models.TextField):
         return value
 
     def to_python(self, value):
-        value = super().to_python(value)
+        value = super(MarkDownField).to_python(value)
         return mark_safe(value)
 
     def from_db_value(self, value, expression, connection, context):
         return self.to_python(value)
+
+    def contribute_to_class(self, cls, name, private_only=False, virtual_only=NOT_PROVIDED):
+        super(MarkDownField, self).contribute_to_class(cls, name, private_only, virtual_only)
+        if not self.source_field and name.endswith("_html"):
+            self.source_field = name[:-5]
 
 
 class JSONField(models.TextField):
