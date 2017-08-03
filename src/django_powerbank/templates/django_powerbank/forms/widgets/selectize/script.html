@@ -1,3 +1,4 @@
+{% load i18n %}
 <script>
     head.ready(function () {
         $('#{{ widget.attrs.id }}').selectize({
@@ -35,7 +36,13 @@
                         callback(res);
                     }
                 });
+            },
+            render: {
+                'option_create': function (data, escape) {
+                    return '<div class="create"> {% trans "Add" %} <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+                }
             }
+
         });
     });
 </script>
