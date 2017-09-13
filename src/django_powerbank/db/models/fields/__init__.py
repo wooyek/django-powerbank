@@ -1,10 +1,4 @@
 # coding=utf-8
-# Copyright 2015 Brave Labs sp. z o.o.
-# All rights reserved.
-#
-# This source code and all resulting intermediate files are CONFIDENTIAL and
-# PROPRIETY TRADE SECRETS of Brave Labs sp. z o.o.
-# Use is subject to license terms. See NOTICE file of this project for details.
 import json
 import logging
 from enum import IntEnum
@@ -207,7 +201,12 @@ class ChoicesIntEnum(IntEnum):
 
     @classmethod
     def choices(cls):
-        return [(item.value, _(item.name.replace("_", " ").capitalize())) for item in cls]
+        return [(item.value, _(ChoicesIntEnum.capitalize(item))) for item in cls]
+
+    @classmethod
+    def capitalize(cls, item):
+        name = item.name.replace("_", " ")
+        return name[0].capitalize() + name[:1]
 
     @classmethod
     def values(cls):
@@ -219,4 +218,4 @@ class BinaryMaskEnum(ChoicesIntEnum):
 
     @classmethod
     def get_display(cls, value):
-        return ", ".join((__(item.name.replace("_", " ").capitalize()) for item in cls if item.value & value))
+        return ", ".join((__(ChoicesIntEnum.capitalize(item)) for item in cls if item.value & value))
