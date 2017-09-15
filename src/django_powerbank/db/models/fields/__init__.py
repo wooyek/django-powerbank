@@ -206,7 +206,7 @@ class ChoicesIntEnum(IntEnum):
     @classmethod
     def capitalize(cls, item):
         name = item.name.replace("_", " ")
-        return name[0].capitalize() + name[:1]
+        return name[0].capitalize() + name[1:]
 
     @classmethod
     def values(cls):
