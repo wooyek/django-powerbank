@@ -38,5 +38,6 @@ recursive-include tests *.env
 recursive-include tests *.py
 recursive-include src *.cfg
 recursive-include src *.po
+recursive-include src *.mo
 recursive-include src *.pot
 
