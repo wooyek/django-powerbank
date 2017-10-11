@@ -77,8 +77,8 @@ sync: ## Sync master and develop branches in both directions
 	git checkout develop
 
 publish: clean ## package and upload a release
-	python setup.py sdist upload
-	python setup.py bdist_wheel upload
+	python setup.py sdist upload -r pypi
+	python setup.py bdist_wheel upload -r pypi
 
 sdist: clean ## package
 	python setup.py sdist
