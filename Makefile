@@ -11,6 +11,7 @@ webbrowser.open("file://" + pathname2url(os.path.abspath(sys.argv[1])))
 endef
 export BROWSER_PYSCRIPT
 BROWSER := python -c "$$BROWSER_PYSCRIPT"
+LOCALE_DIR := $(LOCALE_DIR)
 
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
@@ -52,15 +53,15 @@ docs: ## generate Sphinx HTML documentation, including API docs
 
 locale-create:  ## create locale file for supported languages
 	# http://babel.edgewall.org/wiki/BabelDjango#CreatingandUpdatingTranslationsCatalogs
-	pybabel init -D django -i locale/django.pot -d locale -l pl
+	pybabel init -D django -i $(LOCALE_DIR)/django.pot -d locale -l pl
 
 locale-update: ## generate locale files
 	mkdir -p .tmp
-	pybabel extract -F locale/babel.cfg -o locale/django.pot --no-wrap --sort-output .
-	pybabel update -D django -i locale/django.pot -d locale --previous --no-wrap
+	pybabel extract -F $(LOCALE_DIR)/babel.cfg -o $(LOCALE_DIR)/django.pot --no-wrap --sort-output .
+	pybabel update -D django -i $(LOCALE_DIR)/django.pot -d $(LOCALE_DIR) --previous --no-wrap
 
 locale-compile: ## generate locale files
-	pybabel compile -D django -d locale --statistics
+	pybabel compile -D django -d $(LOCALE_DIR) --statistics
 
 trans: locale-update locale-compile ## update and compile locales
 

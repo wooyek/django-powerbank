@@ -36,3 +36,6 @@ recursive-include src *.js
 recursive-include src .gitignore
 recursive-include tests *.env
 recursive-include tests *.py
+recursive-include locale *.cfg
+recursive-include locale *.po
+recursive-include locale *.pot
