@@ -50,6 +50,20 @@ docs: ## generate Sphinx HTML documentation, including API docs
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html
 
+locale-create:  ## create locale file for supported languages
+	# http://babel.edgewall.org/wiki/BabelDjango#CreatingandUpdatingTranslationsCatalogs
+	pybabel init -D django -i locale/django.pot -d locale -l pl
+
+locale-update: ## generate locale files
+	mkdir -p .tmp
+	pybabel extract -F locale/babel.cfg -o locale/django.pot --no-wrap --sort-output .
+	pybabel update -D django -i locale/django.pot -d locale --previous --no-wrap
+
+locale-compile: ## generate locale files
+	pybabel compile -D django -d locale --statistics
+
+trans: locale-update locale-compile ## update and compile locales
+
 sync: ## Sync master and develop branches in both directions
 	git checkout develop
 	git pull origin develop --verbose

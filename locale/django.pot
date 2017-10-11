@@ -1,0 +1,49 @@
+# Translations template for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-10-11 13:00+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: src/django_powerbank/core/validators.py:24
+#: src/django_powerbank/core/validators.py:38
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#: src/django_powerbank/core/validators.py:14
+msgid "Please enter phone number starting with a plus sign '+', then a country code and then all else. A 10 to 15 digits. Eg. +48 123 456 789"
+msgstr ""
+
+#: src/django_powerbank/core/validators.py:9
+msgid "Please provide a date range in format: YYYY-MM-DD - YYYY-MM-DD"
+msgstr ""
+
+#: src/django_powerbank/forms/widgets.py:37
+msgid "Type a name to search and pick a value"
+msgstr ""
+
+#: src/django_powerbank/views/auth.py:44
+msgid "You are not authorized to view this page"
+msgstr ""
+
+#: src/django_powerbank/db/models/fields/pl.py:22
+msgid "numer identyfikacji podatkowej"
+msgstr ""
+
+#: src/django_powerbank/db/models/fields/pl.py:9
+msgid "numer identyfikacyjny REGON"
+msgstr ""
+
