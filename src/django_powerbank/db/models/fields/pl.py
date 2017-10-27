@@ -8,24 +8,24 @@ class PlRegonField(models.CharField):
     def __init__(self, *args, **kwargs):
         verbose_name = kwargs.pop('verbose_name', _("numer identyfikacyjny REGON"))
         max_length = kwargs.pop('max_length', 14)
-        super().__init__(verbose_name=verbose_name, max_length=max_length, *args, **kwargs)
+        super(PlRegonField, self).__init__(verbose_name=verbose_name, max_length=max_length, *args, **kwargs)
 
     def formfield(self, **kwargs):
-        return super().formfield(form_class=forms.PLREGONField, **kwargs)
+        return super(PlRegonField, self).formfield(form_class=forms.PLREGONField, **kwargs)
 
     def to_python(self, value):
-        return super().to_python(value) or None
+        return super(PlRegonField, self).to_python(value) or None
 
 
 class PlNipField(models.CharField):
     def __init__(self, *args, **kwargs):
         verbose_name = kwargs.pop('verbose_name', _("numer identyfikacji podatkowej"))
         max_length = kwargs.pop('max_length', 13)
-        super().__init__(verbose_name=verbose_name, max_length=max_length, *args, **kwargs)
+        super(PlNipField, self).__init__(verbose_name=verbose_name, max_length=max_length, *args, **kwargs)
 
     def formfield(self, **kwargs):
-        return super().formfield(form_class=forms.PLNIPField, **kwargs)
+        return super(PlNipField, self).formfield(form_class=forms.PLNIPField, **kwargs)
 
     def to_python(self, value):
-        return super().to_python(value) or None
+        return super(PlNipField, self).to_python(value) or None
 
