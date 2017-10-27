@@ -12,11 +12,11 @@ validate_date_range = RegexValidator(r"\d{4}-\d{2}-\d{2} - \d{4}-\d{2}-\d{2}", _
 class MsisdnValidator(RegexValidator):
     def __init__(self, code=None, inverse_match=None, flags=None):
         message = _("Please enter phone number starting with a plus sign '+', then a country code and then all else. A 10 to 15 digits. Eg. +48 123 456 789")
-        super(MsisdnValidator).__init__(r"\+(\d){10,15}", message, code, inverse_match, flags)
+        super(MsisdnValidator, self).__init__(r"\+(\d){10,15}", message, code, inverse_match, flags)
 
     def __call__(self, value):
         value = value.replace(" ", "")
-        return super(MsisdnValidator).__call__(value)
+        return super(MsisdnValidator, self).__call__(value)
 
 
 @deconstructible
