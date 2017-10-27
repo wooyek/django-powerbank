@@ -25,7 +25,7 @@ class PhoneField(models.CharField):
     def to_python(self, value):
         if value in self.empty_values:
             return None
-        return super().to_python(value)
+        return super(PhoneField, self).to_python(value)
 
     def formfield(self, **kwargs):
         defaults = {
@@ -38,7 +38,7 @@ class PhoneField(models.CharField):
 class SourceFieldMixin(object):
     def __init__(self, source_field=None, *args, **kwargs):
         self.source_field = source_field
-        super().__init__(*args, **kwargs)
+        super(SourceFieldMixin, self).__init__(*args, **kwargs)
 
     def check(self, **kwargs):
         errors = super(SourceFieldMixin, self).check(**kwargs)
@@ -71,7 +71,7 @@ class SecretField(SourceFieldMixin, models.CharField):
 
 class AutoSlugField(SourceFieldMixin, models.SlugField):
     def __init__(self, source_field=None, keep_existing=False, *args, **kwargs):
-        super().__init__(source_field, *args, **kwargs)
+        super(AutoSlugField, self).__init__(source_field, *args, **kwargs)
         self.keep_existing = keep_existing
 
     def pre_save(self, model_instance, add):
@@ -89,11 +89,11 @@ class AutoSlugField(SourceFieldMixin, models.SlugField):
 
 class UniqueSlugField(AutoSlugField, models.SlugField):
     def __init__(self, source_field=None, keep_existing=False, *args, **kwargs):
-        super().__init__(source_field, *args, **kwargs)
+        super(UniqueSlugField, self).__init__(source_field, *args, **kwargs)
         self.keep_existing = keep_existing
 
     def get_slug_value(self, model_instance):
-        value = super().get_slug_value(model_instance)
+        value = super(UniqueSlugField, self).get_slug_value(model_instance)
         filters = {
             self.attname + '__gte': value,
             self.attname + '__lte': value + '-9999'
