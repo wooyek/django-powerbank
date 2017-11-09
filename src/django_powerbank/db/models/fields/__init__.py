@@ -80,7 +80,7 @@ class AutoSlugField(SourceFieldMixin, models.SlugField):
             return super(AutoSlugField, self).pre_save(model_instance, add)
 
         value = self.get_slug_value(model_instance)
-        if self.source_fallback and (value is None or value.strip()):
+        if self.source_fallback and (value is None or value.strip() == ''):
             value = self.get_source_value(model_instance)
         setattr(model_instance, self.attname, value)
         return value
