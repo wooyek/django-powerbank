@@ -70,21 +70,27 @@ class SecretField(SourceFieldMixin, models.CharField):
 
 
 class AutoSlugField(SourceFieldMixin, models.SlugField):
-    def __init__(self, source_field=None, keep_existing=False, *args, **kwargs):
+    def __init__(self, source_field=None, keep_existing=False, source_fallback=False, *args, **kwargs):
         super(AutoSlugField, self).__init__(source_field, *args, **kwargs)
+        self.source_fallback = source_fallback
         self.keep_existing = keep_existing
 
     def pre_save(self, model_instance, add):
-        if getattr(model_instance, self.attname) and self.keep_existing or not getattr(model_instance, self.source_field):
+        if getattr(model_instance, self.attname) and self.keep_existing or not self.get_source_value(model_instance):
             return super(AutoSlugField, self).pre_save(model_instance, add)
 
         value = self.get_slug_value(model_instance)
+        if self.source_fallback and (value is None or value.strip()):
+            value = self.get_source_value(model_instance)
         setattr(model_instance, self.attname, value)
         return value
 
     def get_slug_value(self, model_instance):
-        value = getattr(model_instance, self.source_field)
+        value = self.get_source_value(model_instance)
         return slugify(value)
+
+    def get_source_value(self, model_instance):
+        return getattr(model_instance, self.source_field)
 
 
 class UniqueSlugField(AutoSlugField, models.SlugField):
