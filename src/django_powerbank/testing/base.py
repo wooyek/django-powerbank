@@ -28,7 +28,7 @@ class AssertionsMx(TestCase):
                 self.assertListEqual([], form.errors)
 
 
-class MigrationsCheck(TestCase):
+class MigrationsCheckMx(object):
     def setUp(self):
         from django.utils import translation
         self.saved_locale = translation.get_language()
@@ -52,6 +52,10 @@ class MigrationsCheck(TestCase):
         )
         changes = autodetector.changes(graph=executor.loader.graph)
         self.assertEqual({}, changes)
+
+
+class (MigrationsCheckMx, TestCase):
+    pass
 
 
 class AdminUserTestCase(AssertionsMx):
