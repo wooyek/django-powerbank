@@ -54,7 +54,7 @@ class MigrationsCheckMx(object):
         self.assertEqual({}, changes)
 
 
-class (MigrationsCheckMx, TestCase):
+class MigrationsCheck(MigrationsCheckMx, TestCase):
     pass
 
 
