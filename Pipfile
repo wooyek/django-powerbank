@@ -1,0 +1,39 @@
+[[source]]
+
+verify_ssl = true
+url = "https://pypi.python.org/simple"
+name = "pypi"
+
+
+[packages]
+
+Django = "*"
+Markdown = "*"
+
+
+[dev-packages]
+
+Django = "*"
+Markdown = "*"
+mock = "*"
+pytest = "*"
+pytest-xdist = "*"
+pytest-html = "*"
+pytest-django = "*"
+factory_boy = "*"
+"psycopg2" = "*"
+django-environ = "*"
+"bump2version" = "*"
+check-manifest = "*"
+codecov = "*"
+coverage = "*"
+"flake8" = "*"
+invoke = "*"
+isort = "*"
+Pygments = "*"
+readme_renderer = "*"
+Sphinx = ">=1.6.5"
+sphinx_rtd_theme = "*"
+docutils = "==0.13.1"
+sphinxcontrib-spelling = "*"
+pyenchant = "*"

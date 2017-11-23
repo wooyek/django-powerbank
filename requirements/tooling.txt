@@ -8,10 +8,7 @@ coverage
 flake8
 invoke
 isort
-pip
 pygments
 readme-renderer
 setuptools
-tox
-detox
 wheel
