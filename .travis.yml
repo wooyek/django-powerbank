@@ -43,11 +43,12 @@ install:
   - git --version
 
 script:
-  - tox
+  - tox --skip-missing-interpreters
 
 jobs:
   include:
     - stage: make
+      python: "2.5"
       script:
           - which python
           - tox --version
