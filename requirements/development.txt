@@ -1,0 +1,16 @@
+# All base dependencies
+-r base.txt
+
+# For local development we ween all there is in testing
+-r testing.txt
+
+# We want to install (not modifiy PYTHONPATH) local package in editable mode
+-e .
+
+# Tooling
+-r tooling.txt
+
+# Documentation
+-r ../docs/requirements.txt
+
+

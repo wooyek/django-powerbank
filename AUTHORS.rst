@@ -5,7 +5,7 @@ Credits
 Development Lead
 ----------------
 
-* Janusz Skonieczny <js+pypi@bravelabs.pl>
+* @wooyek: Janusz Skonieczny <js+pypi@bravelabs.pl>
 
 Contributors
 ------------

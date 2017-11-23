@@ -17,7 +17,6 @@ end_of_line = crlf
 [LICENSE]
 insert_final_newline = false
 
-
 [*.{py,rst,ini}]
 indent_style = space
 indent_size = 4

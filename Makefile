@@ -1,4 +1,4 @@
-.PHONY: clean-pyc clean-build docs help
+.PHONY: clean clean-test clean-pyc clean-build docs help
 .DEFAULT_GOAL := help
 define BROWSER_PYSCRIPT
 import os, webbrowser, sys
@@ -10,60 +10,93 @@ except:
 webbrowser.open("file://" + pathname2url(os.path.abspath(sys.argv[1])))
 endef
 export BROWSER_PYSCRIPT
+
+define PRINT_HELP_PYSCRIPT
+import re, sys
+
+for line in sys.stdin:
+	match = re.match(r'^([a-zA-Z_-]+):.*?## (.*)$$', line)
+	if match:
+		target, help = match.groups()
+		print("%-20s %s" % (target, help))
+endef
+export PRINT_HELP_PYSCRIPT
 BROWSER := python -c "$$BROWSER_PYSCRIPT"
-LOCALE_DIR := src/django_powerbank/locale
 
 help:
-	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
+	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-clean: clean-build clean-pyc
+clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
+
 
 clean-build: ## remove build artifacts
 	rm -fr build/
 	rm -fr dist/
-	rm -fr *.egg-info
+	rm -fr .eggs/
+	find . -name '*.egg-info' -exec rm -fr {} +
+	find . -name '*.egg' -exec rm -f {} +
 
 clean-pyc: ## remove Python file artifacts
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
+	find . -name '__pycache__' -exec rm -fr {} +
+
+clean-test: ## remove test and coverage artifacts
+	rm -fr .tox/
+	rm -f .coverage
+	rm -fr htmlcov/
+
+isort:
+	isort --verbose --recursive src tests setup.py
 
 lint: ## check style with flake8
-	flake8 django_powerbank tests
+	flake8 src tests setup.py manage.py
+	isort --verbose --check-only --diff --recursive src tests setup.py
+	python setup.py check --strict --metadata --restructuredtext
+	check-manifest  --ignore .idea,.idea/* .
 
 test: ## run tests quickly with the default Python
-	python runtests.py tests
+	pytest
 
-test-all: ## run tests on every Python version with tox
-	tox
+tox: ## run tests on every Python version with tox
+	tox --skip-missing-interpreters --recreate -e clean,py35-django-111,check,report,docs,spell
+
+detox: ## run tests on every Python version with tox
+	detox --skip-missing-interpreters --recreate -e clean,py35-django-111,check,report,docs,spell
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source django_powerbank runtests.py tests
+	coverage run --source src --parallel-mode setup.py test
+
+coverage-report: coverage ## check code coverage and view report in the browser
 	coverage report -m
 	coverage html
-	open htmlcov/index.html
+	$(BROWSER) tmp/coverage/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/django-powerbank.rst
+	rm -f docs/django_powerbank.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ django_powerbank
+	sphinx-apidoc -o docs/ -H "Api docs" src
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
+
+docs-view: docs ## generate Sphinx HTML documentation, including API docs
 	$(BROWSER) docs/_build/html/index.html
 
-locale-create:  ## create locale file for supported languages
-	# http://babel.edgewall.org/wiki/BabelDjango#CreatingandUpdatingTranslationsCatalogs
-	pybabel init -D django -i $(LOCALE_DIR)/django.pot -d locale -l pl
+servedocs: docs ## compile the docs watching for changes
+	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
-locale-update: ## generate locale files
-	mkdir -p .tmp
-	pybabel extract -F $(LOCALE_DIR)/babel.cfg -o $(LOCALE_DIR)/django.pot --no-wrap --sort-output .
-	pybabel update -D django -i $(LOCALE_DIR)/django.pot -d $(LOCALE_DIR) --previous --no-wrap
+publish: clean ## package and upload a release
+	python setup.py sdist upload
+	python setup.py bdist_wheel upload
 
-locale-compile: ## generate locale files
-	pybabel compile -D django -d $(LOCALE_DIR) --statistics
+dist: clean ## builds source and wheel package
+	python setup.py sdist
+	python setup.py bdist_wheel
+	ls -l dist
 
-trans: locale-update locale-compile ## update and compile locales
+install: clean ## install the package to the active Python's site-packages
+	python setup.py install
 
 sync: ## Sync master and develop branches in both directions
 	git checkout develop
@@ -76,18 +109,13 @@ sync: ## Sync master and develop branches in both directions
 	git merge develop --verbose
 	git checkout develop
 
-publish: clean ## package and upload a release
-	python setup.py sdist upload -r pypi
-	python setup.py bdist_wheel upload -r pypi
-
-sdist: clean ## package
-	python setup.py sdist
-	ls -l dist
-
 bump: ## increment version number
 	bumpversion patch
 
-release: sync test-all bump publish ## package and upload a release
+upgrade: ## upgrade frozen requirements to the latest version
+	pipenv lock --requirements > requirements.txt
+
+release: sync bump publish ## build new package varsion release then upload to pypi
 	git checkout develop
 	git merge master --verbose
 	git push origin develop --verbose

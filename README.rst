@@ -1,33 +1,59 @@
-=============================
+================
 Django Powerbank
-=============================
+================
 
-.. image:: https://badge.fury.io/py/django-powerbank.svg
-    :target: https://badge.fury.io/py/django-powerbank
 
-.. image:: https://travis-ci.org/wooyek/django-powerbank.svg?branch=master
-    :target: https://travis-ci.org/wooyek/django-powerbank
+.. image:: https://img.shields.io/pypi/v/django-powerbank.svg
+        :target: https://pypi.python.org/pypi/django-powerbank
 
-.. image:: https://codecov.io/gh/wooyek/django-powerbank/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/wooyek/django-powerbank
+.. image:: https://img.shields.io/travis/wooyek/django-powerbank.svg
+        :target: https://travis-ci.org/wooyek/django-powerbank
 
 .. image:: https://readthedocs.org/projects/django-powerbank/badge/?version=latest
-    :target: https://django-powerbank.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
+        :target: https://django-powerbank.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+.. image:: https://coveralls.io/repos/github/wooyek/django-powerbank/badge.svg?branch=develop
+        :target: https://coveralls.io/github/wooyek/django-powerbank?branch=develop
+        :alt: Coveralls.io coverage
 
-.. image:: https://pyup.io/repos/github/wooyek/django-powerbank/shield.svg
-    :target: https://pyup.io/repos/github/wooyek/django-powerbank/
-    :alt: Updates
+.. image:: https://codecov.io/gh/wooyek/django-powerbank/branch/develop/graph/badge.svg
+        :target: https://codecov.io/gh/wooyek/django-powerbank
+        :alt: CodeCov coverage
+
+.. image:: https://api.codeclimate.com/v1/badges/0e7992f6259bc7fd1a1a/maintainability
+        :target: https://codeclimate.com/github/wooyek/django-powerbank/maintainability
+        :alt: Maintainability
+
+.. image:: https://img.shields.io/github/license/wooyek/django-powerbank.svg
+        :target: https://github.com/wooyek/django-powerbank/blob/develop/LICENSE
+        :alt: License
+
+.. image:: https://img.shields.io/twitter/url/https/github.com/wooyek/django-powerbank.svg?style=social
+        :target: https://twitter.com/intent/tweet?text=Wow:&url=https://github.com/wooyek/django-powerbank
+        :alt: Tweet about this project
+
+.. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg
+        :target: https://saythanks.io/to/wooyek
 
 Extra power for included batteries
 
-A strongly opinionated collection of gems, stones, screws, duct tape & chewing gum that's helps me not to copy-paste code from project to project.
+* Free software: MIT license
+* Documentation: https://django-powerbank.readthedocs.io.
 
+Features
+--------
 
-Documentation
--------------
+* Pending :D
 
-The full documentation is at https://django-powerbank.readthedocs.io.
+Demo
+----
+
+To run an example project for this django reusable app, click the button below and start a demo serwer on Heroku
+
+.. image:: https://www.herokucdn.com/deploy/button.png
+    :target: https://heroku.com/deploy
+    :alt: Deploy Django Opt-out example project to Heroku
+
 
 Quickstart
 ----------
@@ -59,10 +85,6 @@ Add Django Powerbank's URL patterns:
         ...
     ]
 
-Features
---------
-
-* TODO
 
 Running Tests
 -------------
@@ -70,18 +92,20 @@ Running Tests
 Does the code actually work?
 
 ::
+    $ pipenv install --dev
+    $ pipenv shell
+    $ tox
 
-    source <YOURVIRTUALENV>/bin/activate
-    (myenv) $ pip install tox
-    (myenv) $ tox
+
+We recommend using pipenv_ but a legacy approach to creating virtualenv and installing requirements should also work.
+Please install `requirements/development.txt` to setup virtual env for testing and development.
+
 
 Credits
 -------
 
-Tools used in rendering this package:
-
-*  Cookiecutter_
-*  `cookiecutter-djangopackage`_
+This package was created with Cookiecutter_ and the `wooyek/cookiecutter-django-app`_ project template.
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`cookiecutter-djangopackage`: https://github.com/pydanny/cookiecutter-djangopackage
+.. _`wooyek/cookiecutter-django-app`: https://github.com/wooyek/cookiecutter-django-app
+.. _`pipenv`: https://docs.pipenv.org/install.html#fancy-installation-of-pipenv

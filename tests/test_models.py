@@ -1,19 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-test_django-powerbank
-------------
-
-Tests for `django-powerbank` models module.
-"""
-
 from django.test import TestCase
 
-from tests import factories
+from tests.test_app import factories, models
 
 
-class TestDjango_powerbank(TestCase):
+class TestSampleModel(TestCase):
 
     def test_something(self):
-        factories.UserFactory
+        self.assertIsNotNone(models)
+
+    def test_user_factory(self):
+        user = factories.UserFactory()
+        self.assertIsNotNone(user)

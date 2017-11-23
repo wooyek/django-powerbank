@@ -12,7 +12,7 @@ from django.test import Client
 from . import factories
 
 
-class AssertionsMx(TestCase):
+class AssertionsMx(object):
     def assertNoFormErrors(self, response, form_context_key='form'):
         if not hasattr(response, 'context_data'):
             return
@@ -23,17 +23,22 @@ class AssertionsMx(TestCase):
             forms = [forms]
         for form in forms:
             if isinstance(form.errors, dict):
+                # noinspection PyUnresolvedReferences
                 self.assertDictEqual({}, form.errors)
             else:
+                # noinspection PyUnresolvedReferences
                 self.assertListEqual([], form.errors)
 
 
 class MigrationsCheckMx(object):
+    # noinspection PyPep8Naming
     def setUp(self):
         from django.utils import translation
+        # noinspection PyAttributeOutsideInit
         self.saved_locale = translation.get_language()
         translation.deactivate_all()
 
+    # noinspection PyPep8Naming
     def tearDown(self):
         if self.saved_locale is not None:
             from django.utils import translation
@@ -51,6 +56,7 @@ class MigrationsCheckMx(object):
             ProjectState.from_apps(apps),
         )
         changes = autodetector.changes(graph=executor.loader.graph)
+        # noinspection PyUnresolvedReferences
         self.assertEqual({}, changes)
 
 
@@ -59,6 +65,7 @@ class MigrationsCheck(MigrationsCheckMx, TestCase):
 
 
 class AdminUserTestCase(AssertionsMx):
+    # noinspection PyPep8Naming,PyAttributeOutsideInit
     def setUp(self):
         self.client = Client()
         self.user = factories.UserFactory.create(is_superuser=True, is_staff=True, username='django_administrator')
@@ -66,6 +73,7 @@ class AdminUserTestCase(AssertionsMx):
 
 
 class StaffUserTestCase(AssertionsMx):
+    # noinspection PyPep8Naming,PyAttributeOutsideInit
     def setUp(self):
         self.client = Client()
         self.user = factories.UserFactory.create(is_superuser=False, is_staff=True)
@@ -73,6 +81,7 @@ class StaffUserTestCase(AssertionsMx):
 
 
 class UserTestCase(AssertionsMx):
+    # noinspection PyPep8Naming,PyAttributeOutsideInit
     def setUp(self):
         self.client = Client()
         self.user = factories.UserFactory.create(is_superuser=False, is_staff=False)

@@ -1,9 +1,6 @@
 # coding=utf-8
 import logging
 
-from django import db
-from django.core.urlresolvers import reverse_lazy
-from django.db import models
 from django.forms import widgets
 from django.utils.translation import ugettext as __, ugettext_lazy as _
 from django.utils.encoding import force_text

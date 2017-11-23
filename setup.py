@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+"""The setup script."""
+
 import os
 import re
 import sys
@@ -26,7 +29,7 @@ install_requires = parse_requirements(
 )
 
 test_requirements = parse_requirements(
-    os.path.join(os.path.dirname(__file__), "requirements", "test.txt"),
+    os.path.join(os.path.dirname(__file__), "requirements", "testing.txt"),
     session=uuid.uuid1()
 )
 
@@ -34,6 +37,7 @@ test_requirements = parse_requirements(
 def get_version(*file_paths):
     """Retrieves the version from path"""
     filename = os.path.join(os.path.dirname(__file__), *file_paths)
+    print("Looking for version in: {}".format(filename))
     version_file = open(filename).read()
     version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M)
     if version_match:
@@ -71,30 +75,40 @@ setup(
     version=version,
     description="""Extra power for included batteries""",
     long_description=readme + '\n\n' + history,
-    author='Janusz Skonieczny',
+    author="Janusz Skonieczny",
     author_email='js+pypi@bravelabs.pl',
     url='https://github.com/wooyek/django-powerbank',
-    packages=find_packages('src'),
+    packages=find_packages('src', exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     package_dir={'': 'src'},
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
+    entry_points={
+        'console_scripts': [
+            'django_powerbank=django_powerbank.cli:main'
+        ]
+    },
     include_package_data=True,
+    exclude_package_data={
+        '': ['test*.py', 'tests/*.env', '**/tests.py'],
+    },
+    python_requires='>=2.7',
     install_requires=[str(r.req) for r in install_requires] + ['Django>=1.10'],
-    license="MIT",
+    extras_require={
+        'factories': ['factory-boy'],
+    },
+    license="MIT license",
     zip_safe=False,
     keywords='django-powerbank',
     classifiers=[
         'Development Status :: 3 - Alpha',
-        'Framework :: Django',
         'Framework :: Django :: 1.10',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
     test_suite='runtests.run_tests',
     tests_require=[str(r.req) for r in test_requirements],
+    # https://docs.pytest.org/en/latest/goodpractices.html#integrating-with-setuptools-python-setup-py-test-pytest-runner
+    setup_requires=['pytest-runner'],
 )

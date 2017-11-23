@@ -1,10 +1,11 @@
 # coding=utf-8
 import factory
+import faker
 from django.contrib.auth import get_user_model
-from faker import Faker
 
+from . import models
 
-fake = Faker()
+fake = faker.Faker()
 
 
 class UserFactory(factory.DjangoModelFactory):
@@ -17,3 +18,10 @@ class UserFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = get_user_model()
+
+
+class NamedModelFactory(factory.DjangoModelFactory):
+    name = factory.Faker('name')
+
+    class Meta:
+        model = models.NamedModel

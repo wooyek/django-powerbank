@@ -2,7 +2,7 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from ..core.validators import MsisdnValidator
+from django_powerbank.core.validators import MsisdnValidator
 
 
 class MsisdnValidatorTests(TestCase):
