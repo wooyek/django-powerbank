@@ -1,5 +1,4 @@
 # coding=utf-8
-from django.views.generic.edit import FormMixin
 
 
 # class MultiFormMixin(FormMixin):

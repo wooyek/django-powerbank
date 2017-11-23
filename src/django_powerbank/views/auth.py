@@ -1,14 +1,16 @@
 # coding=utf-8
 import logging
+
 from django.contrib.auth.views import redirect_to_login
 from django.http import HttpResponseForbidden
-from django.utils.translation import ugettext as __, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
-from . import ExceptionResponseView, Http403, Http302, ExceptionResponse
+from . import ExceptionResponse, ExceptionResponseView
 
 
 class AbstractAccessView(ExceptionResponseView):
     """Allows you to handle authorization before dispatch is called"""
+
     def check_authorization(self, *args, **kwargs):
         raise NotImplementedError()
 
@@ -35,6 +37,7 @@ class AuthenticatedView(AbstractAccessView):
     def handle_anonymous(self, *args, **kwargs):
         path = self.request.get_full_path()
         return redirect_to_login(path)
+
 
 # Backward compatibility alias
 AccessMixin = AuthenticatedView

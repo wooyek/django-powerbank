@@ -1,7 +1,7 @@
 import six
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseForbidden
-from django.http.response import HttpResponseRedirectBase, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
+from django.http.response import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseRedirectBase
 from django.shortcuts import redirect
 from django.views import View
 

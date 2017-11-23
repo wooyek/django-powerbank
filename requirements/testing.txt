@@ -7,3 +7,4 @@ pytest-django
 factory-boy
 psycopg2
 django-environ
+pathlib ; python_version < '3.3'

@@ -1,9 +1,8 @@
 # coding=utf-8
-import six
 from django.core.exceptions import FieldDoesNotExist
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from six import python_2_unicode_compatible
-from django.utils.translation import ugettext as __, ugettext_lazy as _
 
 
 @python_2_unicode_compatible
@@ -30,9 +29,8 @@ class BaseModel(models.Model):
         """
         Return a dict containing the entity's property values.
 
-        Args:
-          include: Optional set of property names to include, default all.
-          exclude: Optional set of property names to skip, default none.
+        :param include: Optional set of property names to include, default all.
+        :param exclude: Optional set of property names to skip, default none.
             A name contained in both include and exclude is excluded.
         """
         if (include is not None and

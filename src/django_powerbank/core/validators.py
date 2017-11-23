@@ -2,9 +2,9 @@
 from datetime import datetime
 
 from django.core.exceptions import ValidationError
-from django.core.validators import RegexValidator, MaxValueValidator
+from django.core.validators import RegexValidator
 from django.utils.deconstruct import deconstructible
-from django.utils.translation import ugettext as __, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 validate_date_range = RegexValidator(r"\d{4}-\d{2}-\d{2} - \d{4}-\d{2}-\d{2}", _("Please provide a date range in format: YYYY-MM-DD - YYYY-MM-DD"))
 

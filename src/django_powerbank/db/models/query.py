@@ -1,5 +1,4 @@
 # coding=utf-8
-import logging
 from django.db import connections
 from django.db.models import QuerySet
 
@@ -17,7 +16,7 @@ class ApproxQuerySet(QuerySet):
         default_count = self.query.get_count
 
         if (query.high_mark is None and
-                    query.low_mark == 0 and
+                query.low_mark == 0 and
                 not query.where and
                 not query.select and
                 not query.group_by and
@@ -47,8 +46,10 @@ class TableStatusQuerySet(ApproxQuerySet):
             parts = [p.strip('"') for p in self.model._meta.db_table.split('.')]
             cursor = connections[self.db].cursor()
             if len(parts) == 1:
-                cursor.execute('SELECT reltuples::bigint FROM pg_class WHERE relname = %s', parts)
+                cursor.execute('SELECT reltuples::BIGINT FROM pg_class WHERE relname = %s', parts)
             else:
-                cursor.execute('SELECT reltuples::bigint FROM pg_class c JOIN pg_namespace n ON (c.relnamespace = n.oid) WHERE n.nspname = %s AND c.relname = %s', parts)
+                cursor.execute(
+                    'SELECT reltuples::BIGINT FROM pg_class c'
+                    ' JOIN pg_namespace n ON (c.relnamespace = n.oid) WHERE n.nspname = %s AND c.relname = %s', parts)
 
         return default_count(using=self.db)

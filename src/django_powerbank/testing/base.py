@@ -1,14 +1,10 @@
 # coding=utf-8
 # Copyright 2015 Brave Labs sp. z o.o.
-import unittest
 from unittest import TestCase
-
-import sys
-
-from datetime import date, datetime
 
 from django.conf import settings
 from django.test import Client
+
 from . import factories
 
 

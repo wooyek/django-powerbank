@@ -18,7 +18,7 @@ class ReturnUrlMx(ContextMixin, View):
                 # A hail mary hack, to provide a sensible return_url when
                 # this request is not referred to
                 return_url = self.get_success_url()
-            except:
+            except Exception:
                 pass
         return super().get_context_data(return_url=return_url, **kwargs)
 
@@ -34,11 +34,11 @@ class ReturnUrlMx(ContextMixin, View):
         referrer = request.META.get('HTTP_REFERER', None)
 
         # leave alone POST and ajax requests and if return_url is explicitly left empty
-        if request.method != "GET" or \
-                request.is_ajax() or \
-                self.return_url or \
-                referrer is None or \
-                self.return_url is None and 'return_url' in request.GET:
+        if (request.method != "GET" or
+                request.is_ajax() or
+                self.return_url or
+                referrer is None or
+                self.return_url is None and 'return_url' in request.GET):
             return super().dispatch(request, *args, **kwargs)
 
         if not self.return_url:

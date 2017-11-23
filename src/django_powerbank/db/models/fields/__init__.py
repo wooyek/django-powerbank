@@ -8,11 +8,11 @@ from django.core import checks
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import NOT_PROVIDED
-from django.utils.crypto import salted_hmac, get_random_string
-from django.utils.functional import lazy
+from django.utils.crypto import get_random_string, salted_hmac
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
-from django.utils.translation import ugettext as __, ugettext_lazy as _
+from django.utils.translation import ugettext as __
+from django.utils.translation import ugettext_lazy as _
 from markdown import markdown
 
 from django_powerbank.core.validators import MsisdnValidator

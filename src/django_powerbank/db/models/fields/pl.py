@@ -1,7 +1,7 @@
 # coding=utf-8
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from localflavor.pl import forms
-from django.utils.translation import ugettext as __, ugettext_lazy as _
 
 
 class PlRegonField(models.CharField):
@@ -28,4 +28,3 @@ class PlNipField(models.CharField):
 
     def to_python(self, value):
         return super(PlNipField, self).to_python(value) or None
-

@@ -1,8 +1,8 @@
 # coding=utf-8
 from django.forms import widgets
-from django.forms.fields import DateField, CharField
+from django.forms.fields import CharField, DateField
 
-from django_powerbank.forms.widgets import Typeahead, PhoneInput
+from django_powerbank.forms.widgets import PhoneInput, Typeahead
 
 
 class DateRangeField(DateField):

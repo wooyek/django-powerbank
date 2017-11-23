@@ -1,9 +1,8 @@
 # coding=utf-8
-import logging
 
 from django.forms import widgets
-from django.utils.translation import ugettext as __, ugettext_lazy as _
 from django.utils.encoding import force_text
+from django.utils.translation import ugettext_lazy as _
 
 
 class Typeahead(widgets.Input):

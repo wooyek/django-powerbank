@@ -7,7 +7,6 @@ from tests.test_app import factories, models
 
 
 class TestSampleModel(TestCase):
-
     def test_something(self):
         self.assertIsNotNone(models)
 
