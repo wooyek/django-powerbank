@@ -43,9 +43,8 @@ Extra power for included batteries
 Work in progress
 ----------------
 
-This package was created with `wooyek/cookiecutter-django-app`_ project template,
-it may full you by having a lot of cookie filling ready from the start.
-
+This package was created with `wooyek/cookiecutter-django-app`_ project template.
+It may fool you by having a lot of cookie filling just ready from the start.
 Be warned! It may not be ready for eating!
 
 .. image:: https://media.giphy.com/media/DmLUhoNUBfz5C/giphy.gif
