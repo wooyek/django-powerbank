@@ -40,6 +40,16 @@ Extra power for included batteries
 * Free software: MIT license
 * Documentation: https://django-powerbank.readthedocs.io.
 
+Work in progress
+----------------
+
+This package was created with `wooyek/cookiecutter-django-app`_ project template,
+it may full you by having a lot of cookie filling ready from the start.
+
+Be warned! It may not be ready for eating!
+
+.. image:: https://media.giphy.com/media/DmLUhoNUBfz5C/giphy.gif
+
 Features
 --------
 
