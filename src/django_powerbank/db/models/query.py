@@ -28,7 +28,7 @@ class ApproxQuerySet(QuerySet):
 
     @classmethod
     def wrap_query(cls, qry):
-        return qry._clone(klass=cls)
+        return qry._clone()
 
 
 class TableStatusQuerySet(ApproxQuerySet):

@@ -31,7 +31,7 @@ class AuthenticatedView(AbstractAccessView):
 
     # noinspection PyMethodMayBeStatic,PyUnusedLocal
     def is_authenticated(self, *args, **kwargs):
-        return self.request.user.is_authenticated()
+        return self.request.user.is_authenticated
 
     # noinspection PyUnusedLocal
     def handle_anonymous(self, *args, **kwargs):
@@ -56,7 +56,7 @@ class AbstractAuthorizedView(AuthenticatedView):
         return HttpResponseForbidden(self.get_forbidden_message())
 
     def check_authorization(self, *args, **kwargs):
-        if not self.request.user.is_authenticated(*args, **kwargs):
+        if not self.request.user.is_authenticated:
             return self.handle_anonymous(*args, **kwargs)
 
         if not self.is_authorized(*args, **kwargs):
