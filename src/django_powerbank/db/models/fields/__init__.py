@@ -135,8 +135,8 @@ class MarkDownField(SourceFieldMixin, models.TextField):
     def from_db_value(self, value, expression, connection, context):
         return self.to_python(value)
 
-    def contribute_to_class(self, cls, name, private_only=False, virtual_only=NOT_PROVIDED):
-        super(MarkDownField, self).contribute_to_class(cls, name, private_only, virtual_only)
+    def contribute_to_class(self, cls, name, private_only=False):
+        super(MarkDownField, self).contribute_to_class(cls, name, private_only)
         if not self.source_field and name.endswith("_html"):
             self.source_field = name[:-5]
 
