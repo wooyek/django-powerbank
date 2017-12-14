@@ -16,13 +16,16 @@ matrix:
     include:
       - { python: "3.5", env: TOXENV=check }
       - { python: "3.5", env: TOXENV=docs }
-    exclude:
-      - { python: "2.7", env: DJANGO=2.0 }
-      - { python: "3.4", env: DJANGO=2.0 }
-      - { python: "2.7", env: DJANGO=master }
-      - { python: "3.4", env: DJANGO=master }
-      - { python: "3.5", env: DJANGO=master }
 
+    exclude:
+      # Django support for different python versions reference
+      # https://docs.djangoproject.com/en/dev/faq/install/#faq-python-version-support
+      - { python: "2.7", env: DJANGO=2.0 }
+      - { python: "2.7", env: DJANGO=master }
+      - { python: "3.4", env: DJANGO=master } # py34 this will become unsupported for 2.1
+      - { python: "3.6", env: DJANGO=1.9 }
+      - { python: "3.6", env: DJANGO=1.10 }
+      
     allow_failures:
       - python: "2.7"
       - env: DJANGO=2.0
