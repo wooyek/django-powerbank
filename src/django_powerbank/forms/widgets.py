@@ -34,7 +34,7 @@ class SelectizeBase(widgets.Input):
         super().__init__(attrs)
 
     def build_attrs(self, base_attrs, extra_attrs=None, **kwargs):
-        extra_attrs["class"] = extra_attrs.get("class", "") + " "
+        extra_attrs["class"] = extra_attrs.get("class", "") + " selectize-base-widget"
         extra_attrs.setdefault("data-url", self.url)
         attrs = super().build_attrs(base_attrs, extra_attrs=extra_attrs, **kwargs)
         return attrs
