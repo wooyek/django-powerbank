@@ -3,7 +3,8 @@
 # For development we keep them unfreezed to work and test on newest versions as soon as they are released
 # Freezing can be perforemd by pip-compile or pipenv
 
-django>=2.0
+#django<=2.0 ; python_version < '3.5'
+#django>=2.0 ; python_version >= '3.5'
 django-localflavor
 enum34 ; python_version < '3.4'
 markdown
