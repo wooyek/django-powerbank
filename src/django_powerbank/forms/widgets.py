@@ -22,12 +22,14 @@ class PhoneInput(widgets.TextInput):
 
 
 class SelectizeBase(widgets.Input):
-    def __init__(self, attrs=None, url=None, allow_create=False, value_field='text', label_field='text', search_field='text', plugins=[]):
+    def __init__(self, attrs=None, url=None, allow_create=False, value_field='text', label_field='text', search_field='text', plugins=[],
+                 close_after_select=True):
         self.url = url
         self.allow_create = allow_create
         self.value_field = value_field
         self.label_field = label_field
         self.search_field = search_field
+        self.close_after_select = close_after_select
         self.plugins = plugins
         attrs = attrs or {}
         attrs.setdefault('placeholder', _('Type a name to search and pick a value'))
@@ -47,6 +49,7 @@ class SelectizeBase(widgets.Input):
         selectize['value_field'] = self.value_field
         selectize['label_field'] = self.label_field
         selectize['search_field'] = self.search_field
+        selectize['close_after_select'] = self.close_after_select
         selectize['plugins'] = self.plugins
         return context
 
