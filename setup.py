@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """The setup script."""
@@ -10,7 +9,13 @@ import uuid
 from glob import glob
 from os.path import basename, splitext
 
-from pip.req import parse_requirements
+try:  # for pip >= 10
+    # noinspection PyProtectedMember,PyPackageRequirements
+    from pip._internal.req import parse_requirements
+except ImportError:  # for pip <= 9.0.3
+    # noinspection PyPackageRequirements
+    from pip.req import parse_requirements
+
 
 try:
     from setuptools import setup, find_packages
