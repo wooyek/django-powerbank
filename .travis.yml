@@ -1,4 +1,5 @@
 language: python
+sudo: false
 
 python:
     - "3.6"
@@ -14,6 +15,7 @@ env:
 matrix:
     fast_finish: true
     include:
+      - { python: "3.7", env: TOXENV=py37-django-21 }
       - { python: "3.5", env: TOXENV=check }
       - { python: "3.5", env: TOXENV=docs }
 
@@ -21,14 +23,20 @@ matrix:
       # Django support for different python versions reference
       # https://docs.djangoproject.com/en/dev/faq/install/#faq-python-version-support
       - { python: "2.7", env: DJANGO=2.0 }
+      - { python: "2.7", env: DJANGO=2.1 }
       - { python: "2.7", env: DJANGO=master }
+      - { python: "3.4", env: DJANGO=2.1 }
       - { python: "3.4", env: DJANGO=master } # py34 this will become unsupported for 2.1
       - { python: "3.6", env: DJANGO=1.9 }
       - { python: "3.6", env: DJANGO=1.10 }
-      
+
     allow_failures:
+      - python: "3.4"
       - python: "2.7"
-      - env: DJANGO=2.0
+      - env: DJANGO=1.8
+      - env: DJANGO=1.9
+      - env: DJANGO=1.10
+      - env: DJANGO=2.1
       - env: DJANGO=master
 
 before_install:
@@ -47,7 +55,7 @@ install:
   - git --version
 
 script:
-  - tox --skip-missing-interpreters
+  - tox
 
 jobs:
   include:
@@ -80,4 +88,4 @@ after_success:
 notifications:
   email:
     on_success: never
-    on_failure: always
+    on_failure: change
