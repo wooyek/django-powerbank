@@ -2,4 +2,4 @@
 
 __author__ = """Janusz Skonieczny"""
 __email__ = 'js+pypi@bravelabs.pl'
-__version__ = '0.3.5'
+__version__ = '0.4.0'
