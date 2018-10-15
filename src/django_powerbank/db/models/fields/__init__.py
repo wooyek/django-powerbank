@@ -4,6 +4,7 @@ import logging
 from enum import IntEnum
 
 import six
+from django.conf import settings
 from django.core import checks
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -123,7 +124,8 @@ class MarkDownField(SourceFieldMixin, models.TextField):
             return super(MarkDownField, self).pre_save(model_instance, add)
 
         value = getattr(model_instance, self.source_field)
-        value = markdown(value)
+        extensions = settings.MARK_DOWN_FIELD_EXTENSIONS.split(',')
+        value = markdown(value, extensions=extensions)
         setattr(model_instance, self.attname, value)
         return value
 

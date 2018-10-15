@@ -13,3 +13,10 @@ class UniqueSlugFieldTests(TestCase):
         self.assertEqual("name", a.slug)
         self.assertEqual("name-1", b.slug)
         self.assertEqual("name-2", c.slug)
+
+
+class MarkDownFieldTests(TestCase):
+    def test_extensions(self):
+        item = models.Markdown(text='## Lorem {:class="lead"}')
+        item.save()
+        self.assertEqual('<h2 class="lead">Lorem</h2>',  item.text_html)
