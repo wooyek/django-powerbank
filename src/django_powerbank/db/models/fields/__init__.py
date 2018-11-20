@@ -133,7 +133,7 @@ class MarkDownField(SourceFieldMixin, models.TextField):
         value = super(MarkDownField, self).to_python(value)
         return mark_safe(value)
 
-    def from_db_value(self, value, expression, connection, context):
+    def from_db_value(self, value, expression, connection):
         return self.to_python(value)
 
     def contribute_to_class(self, cls, name, private_only=False):
