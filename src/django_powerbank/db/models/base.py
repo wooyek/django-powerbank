@@ -49,6 +49,8 @@ class BaseModel(models.Model):
                 values.pop(name)
             if name.startswith("_"):
                 values.pop(name, None)
+            if callable(getattr(self, name)):
+                values.pop(name, None)
         return values
 
     def get_field_names(self):
