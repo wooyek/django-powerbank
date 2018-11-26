@@ -8,9 +8,9 @@ python:
     - "2.7"
 
 env:
-    - DJANGO=1.11
-    - DJANGO=2.0
     - DJANGO=2.1
+    - DJANGO=2.0
+    - DJANGO=1.11
     - DJANGO=master
 
 matrix:
@@ -61,7 +61,7 @@ script:
 jobs:
   include:
     - stage: make
-      python: "3.5"
+      python: "3.6"
       script:
           - which python
           - tox --version
